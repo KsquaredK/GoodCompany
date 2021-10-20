@@ -1,3 +1,6 @@
-# FirebaseMVC
+# GoodCompany MVC
+a back end capstone project using C# .NET 
 
-A simple example of using Firebase Authentication in an MVC app
+## This desktop app makes the job search easy by helping you track your applications, research, and deadlines.
+
+
