@@ -78,8 +78,8 @@ namespace GoodCompanyMVC.Repositories
                     Name = DbUtils.GetString(reader, "Name"),
                     CompanySize = DbUtils.GetString(reader, "CompanySize"),
                     CompanyNotes = DbUtils.GetString(reader, "Notes"),
-                    //HasMentor = DbUtils.GetInt(reader, "HasMentor"),
-                    //HasProfDev = DbUtils.GetInt(reader, "HasProfDev"), 
+                    HasMentor = DbUtils.GetBoolean(reader, "HasMentor"),
+                    HasProfDev = DbUtils.GetBoolean(reader, "HasProfDev"),
                     CompanyUrl = DbUtils.GetString(reader, "CompanyUrl"),
                     ContactNotes = DbUtils.GetString(reader, "ContactNotes")
 
