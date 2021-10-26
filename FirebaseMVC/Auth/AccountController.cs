@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 using GoodCompanyMVC.Auth.Models;
 using GoodCompanyMVC.Repositories;
 using GoodCompanyMVC.Models;
-using Microsoft.Extensions.Configuration;
 
 namespace GoodCompanyMVC.Auth
 {
     public class AccountController : Controller
-        //FirebaseAuthService similar to FirebaseManager, dependency injected here
+        //FirebaseAuthService is similar to a client manager in web API, dependency injected here
     {
         private readonly IFirebaseAuthService _firebaseAuthService;
         private readonly IUserProfileRepository _userProfileRepository;
@@ -31,7 +30,7 @@ namespace GoodCompanyMVC.Auth
         [HttpPost]
         public async Task<IActionResult> Login(Credentials credentials)
         {
-            //server side form validation
+            //server side form validation 
             if (!ModelState.IsValid)
             {
 
@@ -57,7 +56,7 @@ namespace GoodCompanyMVC.Auth
 
             return RedirectToAction("Index", "Home");
         }
-        //FormatFilterAttribute where data model has spcific reqs
+        //Form where data model has specific reqs
         public IActionResult Register()
         {
             return View();
@@ -84,7 +83,9 @@ namespace GoodCompanyMVC.Auth
             {
                 Email = fbUser.Email,
                 FirebaseUserId = fbUser.FirebaseUserId,
+                Name = registration.Name
             };
+
             _userProfileRepository.Add(newUserProfile);
 
             await LoginToApp(newUserProfile);

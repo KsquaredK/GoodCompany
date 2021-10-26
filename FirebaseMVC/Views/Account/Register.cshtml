@@ -1,4 +1,5 @@
-﻿@model GoodCompanyMVC.Auth.Models.Registration
+﻿@*data type being passed in: the Registration object*@
+@model GoodCompanyMVC.Auth.Models.Registration
 
 @{
     ViewData["Title"] = "Register";
@@ -11,6 +12,11 @@
     <div class="col-md-4">
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" type="password" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />

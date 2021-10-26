@@ -25,6 +25,11 @@ namespace GoodCompanyMVC
             services.AddHttpClient();
             services.AddTransient<IFirebaseAuthService, FirebaseAuthService>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<IApplicationRepository, ApplicationRepository>();
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<ISkillRepository, SkillRepository>();
+            services.AddTransient<IPositionRepository, PositionRepository>();
+            services.AddTransient<IPositionSkillRepository, PositionSkillRepository>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -46,6 +51,7 @@ namespace GoodCompanyMVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStatusCodePages();
 
             app.UseRouting();
 

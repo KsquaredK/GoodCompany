@@ -42,7 +42,7 @@ namespace GoodCompanyMVC.Auth
             var url = FIREBASE_SIGN_UP_BASE_URL + _firebaseApiKey;
             return await SignUpOrSignIn(registration.Email, registration.Password, url);
         }
-//TaskCanceledException only be called - everything here strongly typed from http lib
+//Task can only be called - everything here strongly typed from http lib
 //await is like .then in function call
         private async Task<FirebaseUser> SignUpOrSignIn(string email, string password, string url)
         {
@@ -62,7 +62,7 @@ namespace GoodCompanyMVC.Auth
             var content = await response.Content.ReadAsStringAsync();
             var firebaseResponse =
                 JsonSerializer.Deserialize<FirebaseResponse>(content, _jsonSerializerOptions);
-//if localId, add new user (using constructor in model)
+//if no localId, add new user (using constructor in model)
             return firebaseResponse.LocalId != null
                 ? new FirebaseUser(firebaseResponse.Email, firebaseResponse.LocalId)
                 : null;

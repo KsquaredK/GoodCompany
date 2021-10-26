@@ -11,7 +11,11 @@ namespace GoodCompanyMVC.Models
 
         public int PositionId { get; set; }
 
+        public Position Position { get; set; }
+
         public int UserProfileId { get; set; }
+
+        public UserProfile UserProfile { get; set; }
 
         public DateTime DateApplied { get; set; }
 

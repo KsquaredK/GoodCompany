@@ -1,0 +1,82 @@
+﻿@model GoodCompanyMVC.Models.Company
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container pt-5">
+    <div class="company">
+        <section class="px-3">
+            <div class="row justify-content-between">
+                <h1>@Model.Name</h1>
+            </div>
+            <div class="row">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary mx-1" title="Edit">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-primary mx-1" title="Delete">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </div>
+        </section>
+        <hr />
+
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Id)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CompanySize)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CompanySize)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CompanyUrl)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CompanyUrl)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ContactNotes)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ContactNotes)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HasMentor)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HasMentor)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HasProfDev)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HasProfDev)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary mx-1" title="Edit">
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+            <a asp-action="Delete" asp-route-id="@Model.Id"
+               class="btn btn-outline-primary mx-1" title="Delete" onclick="return confirm(`Are you sure you want to delete this post?`);">
+                <i class="fas fa-trash"></i>
+            </a>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+    </div>
+</div>

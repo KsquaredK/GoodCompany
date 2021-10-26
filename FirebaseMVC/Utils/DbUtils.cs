@@ -12,7 +12,7 @@ namespace GoodCompanyMVC.Utils
         /// <summary>
         ///  Get a string from a data reader object and gracefully handle NULL values
         /// </summary>
-        /// <param name="reader">A SqlDataReader that has not exhausted it's result set.</param>
+        /// <param name="reader">A SqlDataReader that has not exhausted its result set.</param>
         /// <param name="column">The name of the column from the result set refereed to by the reader.</param>
         /// <returns>The value of the given column or null.</returns>
         public static string GetString(SqlDataReader reader, string column)
@@ -28,8 +28,7 @@ namespace GoodCompanyMVC.Utils
 
         public static bool GetBoolean(SqlDataReader reader, string column)
         {
-            var ordinal = reader.GetOrdinal(column);
-            return reader.GetBoolean(ordinal);
+            return reader.GetBoolean(reader.GetOrdinal(column));
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace GoodCompanyMVC.Utils
         ///  This method assumes the value is not NULL.
         /// </summary>
         /// <param name="reader">A SqlDataReader that has not exhausted it's result set.</param>
-        /// <param name="column">The name of the column from the result set refereed to by the reader.</param>
+        /// <param name="column">The name of the column from the result set referred to by the reader.</param>
         /// <returns>The value of the given column.</returns>
         public static DateTime GetDateTime(SqlDataReader reader, string column)
         {
