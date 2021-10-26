@@ -25,7 +25,7 @@ namespace GoodCompanyMVC.Controllers
         // GET: Handles http GET request
         public ActionResult Index()
         {
-            List<Company> companies = _companyRepo.GetCompanies();
+            List<Company> companies = _companyRepo.GetCompanies();      
             return View(companies);
         }
 
@@ -85,7 +85,8 @@ namespace GoodCompanyMVC.Controllers
         // GET: CompanyController/Edit/5
         public ActionResult Edit(int id)
         {
-            Company company = _companyRepo.GetCompanyById(id);
+            int userId = GetCurrentUserId();
+            var updateCompany = _companyRepo.GetCompanyById(id, userId);
             if (company == null)
             {
                 return NotFound();

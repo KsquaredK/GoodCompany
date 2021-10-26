@@ -31,7 +31,9 @@ namespace GoodCompanyMVC.Repositories
                     {
                         Company company = new Company()
                         {
+                            Id = DbUtils.GetInt(reader, "Id"),
                             Name = DbUtils.GetString(reader, "Name"),
+                            CompanySize = DbUtils.GetString(reader, "CompanySize"),
                             HasMentor = DbUtils.GetBoolean(reader, "HasMentor"),
                             HasProfDev = DbUtils.GetBoolean(reader, "HasProfDev"),
                             CompanyUrl = DbUtils.GetString(reader, "CompanyUrl"),
@@ -47,16 +49,22 @@ namespace GoodCompanyMVC.Repositories
 
         }
         
-        public List<Company> GetCompaniesByUser(int id)
+        public List<Company> GetCompaniesByUser(int id, int userProfileId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, [Name], CompanySize, HasMentor,  HasProfDev, CompanyUrl, ContactNotes
-                                        FROM Company
-                                        ORDER BY Name ASC";
+                    cmd.CommandText = @"SELECT c.[Name] AS Company, c.CompanyUrl AS Website,
+                                               p.CompanyId, 
+                                               p.Title AS Position, 
+                                               u.Id
+                                        FROM Company c
+                                        LEFT JOIN Position p ON c.Id = p.CompanyId
+                                        LEFT JOIN Application a ON a.PositionId = p.Id
+                                        LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
+                                        WHERE c.Id = 3";
 
                     cmd.Parameters.AddWithValue(@"id", id);
 
@@ -86,7 +94,7 @@ namespace GoodCompanyMVC.Repositories
 
         }
 
-        public  Company GetCompanyById(int id)
+        public  Company GetCompanyById(int id, int userProfileId)
         {
             using (var conn = Connection)
             {
