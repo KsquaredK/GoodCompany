@@ -13,8 +13,6 @@ namespace GoodCompanyMVC.Models
 
         public string CompanySize { get; set; }
 
-        public string CompanyNotes { get; set; }
-
         public string CompanyUrl { get; set; }
 
         public string ContactNotes { get; set; }
@@ -24,5 +22,3 @@ namespace GoodCompanyMVC.Models
         public bool HasProfDev { get; set; }
     }
 }
-
-//comanysize, company url, contactnotes, hasmentor, hasprofdev

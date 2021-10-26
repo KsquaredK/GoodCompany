@@ -1,0 +1,68 @@
+﻿@model GoodCompanyMVC.Models.Company
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+The @*asp-forattribute is something we get from ASP.NETand razor. When the attribute is on a <label>
+    element, the generated html will be whatever the property name is.*@
+
+    <h1>Add a Company</h1>
+
+    <h4>Company</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            @*All of our input elements should be inside a form. The asp-actionattribute is added 
+            to the form element to specify which controller action should be called when the 
+            form gets submitted. The the contents of the form we're building here should be 
+            submitted to the Createmethod in our controller.*@
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    @*When the asp-forattribute is on an <input>element, it will generate
+                html attributes that will allow us to know later on that the value
+                for this input field should be set as a comapny's name.*@
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CompanySize" class="control-label"></label>
+                    <input asp-for="CompanySize" class="form-control" />
+                    <span asp-validation-for="CompanySize" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CompanyUrl" class="control-label"></label>
+                    <input asp-for="CompanyUrl" class="form-control" />
+                    <span asp-validation-for="CompanyUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactNotes" class="control-label"></label>
+                    <input asp-for="ContactNotes" class="form-control" />
+                    <span asp-validation-for="ContactNotes" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HasMentor" /> @Html.DisplayNameFor(model => model.HasMentor)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HasProfDev" /> @Html.DisplayNameFor(model => model.HasProfDev)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

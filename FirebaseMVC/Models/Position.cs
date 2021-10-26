@@ -11,7 +11,9 @@ namespace GoodCompanyMVC.Models
 
         public string Title { get; set; }
 
-        public int ComanyId { get; set; }
+        public int CompanyId { get; set; }
+
+        public Company Company { get; set; }
 
         public DateTime DateListed { get; set; }
 
