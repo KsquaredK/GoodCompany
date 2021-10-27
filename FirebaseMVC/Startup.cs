@@ -51,6 +51,7 @@ namespace GoodCompanyMVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+//not included in scaffolding; added to render "Not Found"
             app.UseStatusCodePages();
 
             app.UseRouting();
@@ -58,6 +59,7 @@ namespace GoodCompanyMVC
             app.UseAuthentication();
             app.UseAuthorization();
 
+//defines pattern: which controller action to invoke, based on URL route
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

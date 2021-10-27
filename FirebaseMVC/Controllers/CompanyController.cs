@@ -1,12 +1,16 @@
 ﻿using GoodCompanyMVC.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Collections.Generic;
 using GoodCompanyMVC.Models;
 using System.Linq;
 using System;
+
+//Controller classes handle incoming HTTP requests.
+//They can validate the user, validate request data,
+//query the database, contain logic for manipulating
+//the data, and generate an HTML response.
 
 namespace GoodCompanyMVC.Controllers
 {
@@ -29,7 +33,7 @@ namespace GoodCompanyMVC.Controllers
             return View(companies);
         }
 
-        public ActionResult MyCompanies()
+        public ActionResult UserIndex()
         {
             int userId = GetCurrentUserId();
             var companies = _companyRepo.GetCompaniesByUser(userId);
@@ -37,10 +41,12 @@ namespace GoodCompanyMVC.Controllers
         }
 
         // GET: CompanyController/Details/5
+        //When the ASP.NET framework invokes this method for us,
+        //it will take whatever value is in the url and pass it in.
         public ActionResult Details(int id)
         {
-            int userId = GetCurrentUserId(); 
-            var company = _companyRepo.GetCompanyById(id);
+            int userId = GetCurrentUserId();
+            Company company = _companyRepo.GetCompanyById(id, userId);
             if (company == null)
             {
                 return NotFound();
@@ -73,10 +79,12 @@ namespace GoodCompanyMVC.Controllers
                 try
                 {
                     _companyRepo.AddCompany(company);
+//Redirect to updated list view
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
+//Or, if submission fails, return to empty form view
                     return View(company);
                 }
             }
@@ -85,8 +93,7 @@ namespace GoodCompanyMVC.Controllers
         // GET: CompanyController/Edit/5
         public ActionResult Edit(int id)
         {
-            int userId = GetCurrentUserId();
-            var updateCompany = _companyRepo.GetCompanyById(id, userId);
+            Company company = _companyRepo.GetCompanyById(id, GetCurrentUserId());
             if (company == null)
             {
                 return NotFound();
@@ -99,33 +106,31 @@ namespace GoodCompanyMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Company company)
         {
-            try
-            {
+
                 _companyRepo.UpdateCompany(company);
-                    return RedirectToAction("MyCompanies");
-            }
-            catch (Exception ex)
-            {
-                return View(company);
-            }
+                    return RedirectToAction("UserIndex");
+
         }
 
         // GET: CompanyController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            int userId = GetCurrentUserId();
+            Company company = _companyRepo.GetCompanyById(id, userId);
+            return View(company);
         }
 
         // POST: CompanyController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Company company)
         {
             try
             {
+                _companyRepo.DeleteCompany(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

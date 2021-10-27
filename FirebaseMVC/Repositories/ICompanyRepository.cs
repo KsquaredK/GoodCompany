@@ -6,7 +6,7 @@ namespace GoodCompanyMVC.Repositories
     public interface ICompanyRepository
     {
         List<Company> GetCompanies();
-        List<Company> GetCompaniesByUser(int id, int userId);
+        List<Company> GetCompaniesByUser(int userId);
         Company GetCompanyById(int id, int userId);
         void AddCompany(Company company);
         void UpdateCompany(Company company);
