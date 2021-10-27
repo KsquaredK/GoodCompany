@@ -36,7 +36,7 @@ namespace GoodCompanyMVC.Controllers
         public ActionResult UserIndex()
         {
             int userId = GetCurrentUserId();
-            var companies = _companyRepo.GetCompaniesByUser(userId);
+            var companies = _companyRepo.GetCompaniesByCurrentUser(userId);
             return View(companies);
         }
 
@@ -45,8 +45,7 @@ namespace GoodCompanyMVC.Controllers
         //it will take whatever value is in the url and pass it in.
         public ActionResult Details(int id)
         {
-            int userId = GetCurrentUserId();
-            Company company = _companyRepo.GetCompanyById(id, userId);
+            Company company = _companyRepo.GetCompanyById(id);
             if (company == null)
             {
                 return NotFound();
@@ -93,7 +92,7 @@ namespace GoodCompanyMVC.Controllers
         // GET: CompanyController/Edit/5
         public ActionResult Edit(int id)
         {
-            Company company = _companyRepo.GetCompanyById(id, GetCurrentUserId());
+            Company company = _companyRepo.GetCompanyById(id);
             if (company == null)
             {
                 return NotFound();
@@ -115,8 +114,7 @@ namespace GoodCompanyMVC.Controllers
         // GET: CompanyController/Delete/5
         public ActionResult Delete(int id)
         {
-            int userId = GetCurrentUserId();
-            Company company = _companyRepo.GetCompanyById(id, userId);
+            Company company = _companyRepo.GetCompanyById(id);
             return View(company);
         }
 
@@ -128,7 +126,7 @@ namespace GoodCompanyMVC.Controllers
             try
             {
                 _companyRepo.DeleteCompany(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserIndex");
             }
             catch (Exception ex)
             {

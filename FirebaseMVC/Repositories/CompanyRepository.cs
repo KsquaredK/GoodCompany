@@ -49,7 +49,7 @@ namespace GoodCompanyMVC.Repositories
 
         }
         
-        public List<Company> GetCompaniesByUser(int userId)
+        public List<Company> GetCompaniesByCurrentUser(int userId)
         {
             using (var conn = Connection)
             {
@@ -94,7 +94,7 @@ namespace GoodCompanyMVC.Repositories
 
         }
 
-        public Company GetCompanyById(int id, int userId)
+        public Company GetCompanyById(int id)
         {
             using (var conn = Connection)
             {
@@ -109,11 +109,10 @@ namespace GoodCompanyMVC.Repositories
                       LEFT JOIN Position p ON c.Id = p.CompanyId
                       LEFT JOIN Application a ON a.PositionId = p.Id
                       LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
-                      WHERE c.Id = @id AND u.id = @userId
+                      WHERE c.Id = @id
                       ORDER BY c.Name ASC";
 
                     cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@userId", userId);
 
 
                     Company company = null;
