@@ -1,4 +1,9 @@
-﻿@model IEnumerable<GoodCompanyMVC.Models.Company>
+﻿@*This code tells the view it is being passed a 
+List of objects. When the server has to respond a request for this Index, 
+the view will iterate over the list of companiess and create a div element 
+for each one. Razor generates the html the server sends back to a user's browser.*@
+
+@model IEnumerable<GoodCompanyMVC.Models.Company>
 @using System.Security.Claims;
 
 @{
@@ -13,6 +18,8 @@
 <table class="table">
     <thead>
         <tr>
+@*the Model keyword is a reference to whatever object that the view 
+    receives from the controller*@
             <th>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
@@ -26,24 +33,25 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyUrl)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyUrl)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
