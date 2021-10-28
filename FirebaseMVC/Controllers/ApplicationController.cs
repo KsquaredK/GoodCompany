@@ -5,7 +5,8 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using GoodCompanyMVC.Models;
 using System.Linq;
-using System;
+
+using GoodCompanyMVC.Models.ViewModels;
 
 namespace GoodCompanyMVC.Controllers
 {
@@ -16,10 +17,9 @@ namespace GoodCompanyMVC.Controllers
         private readonly IPositionRepository _positionRepo;
         private readonly ICompanyRepository _companyRepo;
         private readonly IUserProfileRepository _userRepo;
-        private readonly ISkillRepository _skillRepo;
 
         public ApplicationController(IApplicationRepository applicationRepository, IUserProfileRepository userRepository, ICompanyRepository
-          companyRepository, IPositionRepository positionRepository, ISkillRepository skillRepository)
+          companyRepository, IPositionRepository positionRepository)
         {
             _applicationRepo = applicationRepository;
             _positionRepo = positionRepository;
@@ -31,11 +31,13 @@ namespace GoodCompanyMVC.Controllers
         public ActionResult Index()
         {
             List<Application> applications = _applicationRepo.GetApplications();
+
             return View(applications);
         }
 
         public IActionResult UserIndex()
         {
+            //ApplicationViewModel vm = new ApplicationViewModel()
             var applications = _applicationRepo.GetApplications();
             var filteredApplications = applications.Where(application => application.UserProfileId == GetCurrentUserId());
 

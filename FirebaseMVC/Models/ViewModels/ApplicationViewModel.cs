@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 
 namespace GoodCompanyMVC.Models.ViewModels
 {
@@ -9,14 +7,23 @@ namespace GoodCompanyMVC.Models.ViewModels
     {
         public Application Application { get; set; }
 
-        public List<Company> Company { get; set; }
+        public Company Company { get; set; }
+
+        public  int CompanyId { get; set; }
 
         public List<Position> Position { get; set; }
 
+        public int PositionId { get; set; }
+
+        public int PositionSkillId { get; set; }
+
         public List<Skill> Skill { get; set; }
+
+        public int SkillId { get; set; }
 
         public List<UserProfile> UserProfile { get; set; }
 
+        public int UserProfileId { get; set; }
 
     }
 }

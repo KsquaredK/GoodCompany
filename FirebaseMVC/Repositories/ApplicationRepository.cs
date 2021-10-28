@@ -1,4 +1,5 @@
 ﻿using GoodCompanyMVC.Models;
+using GoodCompanyMVC.Models.ViewModels;
 using GoodCompanyMVC.Utils;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -21,9 +22,8 @@ namespace GoodCompanyMVC.Repositories
                 using var cmd = conn.CreateCommand();
                 {
                     cmd.CommandText = @"SELECT Id, PositionId, UserProfileId AS UserId, 
-                                        DateApplied, NextAction, NextActionDue, 
-                                        RecommenderNotes
-                                        FROM Application
+                                        DateApplied, NextAction, NextActionDue, RecommenderNotes
+                                        FROM Application 
                                         ORDER BY DateApplied ASC";
 
                     var reader = cmd.ExecuteReader();
@@ -39,10 +39,9 @@ namespace GoodCompanyMVC.Repositories
                             DateApplied = DbUtils.GetDateTime(reader, "DateApplied"),
                             NextAction = DbUtils.GetString(reader, "NextAction"),
                             NextActionDue = DbUtils.GetDateTime(reader, "NextActionDue"),
-                            RecommenderNotes = DbUtils.GetString(reader, "RecommenderNotes")
+                            RecommenderNotes = DbUtils.GetString(reader, "RecommenderNotes"),
                         };
                         applications.Add(application);
-                        return applications;
                     }
                     return applications;
                 }
