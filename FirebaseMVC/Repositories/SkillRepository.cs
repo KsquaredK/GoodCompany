@@ -1,9 +1,9 @@
-﻿using GoodCompanyMVC.Models;
-using GoodCompanyMVC.Utils;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
+using GoodCompanyMVC.Models;
+using GoodCompanyMVC.Utils;
 
 
 namespace GoodCompanyMVC.Repositories
@@ -40,12 +40,6 @@ namespace GoodCompanyMVC.Repositories
         public List<Skill> DeleteSkill(int id)
         {
             throw new NotImplementedException();
-        }
-
-        private Skill NewSkillFromReader(SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-
         }
     }
 }

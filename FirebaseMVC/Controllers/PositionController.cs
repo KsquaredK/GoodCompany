@@ -41,7 +41,7 @@ namespace GoodCompanyMVC.Controllers
         {
             int userId = GetCurrentUserId();
             Position position = _positionRepo.GetPositionById(id);
-            List<Company> companies = _companyRepo.GetCompaniesByUser(userId);
+            List<Company> companies = _companyRepo.GetCompaniesByCurrentUser(userId);
 
             var vm = new PositionsViewModel()
             {
