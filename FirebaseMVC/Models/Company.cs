@@ -15,8 +15,6 @@ namespace GoodCompanyMVC.Models
 
         public string CompanyUrl { get; set; }
 
-        public string ContactNotes { get; set; }
-
         public bool HasMentor { get; set; }
 
         public bool HasProfDev { get; set; }

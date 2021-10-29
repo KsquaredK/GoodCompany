@@ -19,7 +19,7 @@ namespace GoodCompanyMVC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Name, CompanySize, HasMentor, HasProfDev, CompanyUrl, ContactNotes
+                    cmd.CommandText = @"SELECT Id, Name, CompanySize, HasMentor, HasProfDev, CompanyUrl
                                         FROM Company
                                         ORDER BY Name ASC";
 
@@ -37,7 +37,6 @@ namespace GoodCompanyMVC.Repositories
                             HasMentor = DbUtils.GetBoolean(reader, "HasMentor"),
                             HasProfDev = DbUtils.GetBoolean(reader, "HasProfDev"),
                             CompanyUrl = DbUtils.GetString(reader, "CompanyUrl"),
-                            ContactNotes = DbUtils.GetString(reader, "ContactNotes"),
                         };
                     companies.Add(company);
                     }
@@ -55,14 +54,13 @@ namespace GoodCompanyMVC.Repositories
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
+
+                    //*****
                 {
-                    cmd.CommandText = @"SELECT c.Id, c.Name AS Company, c.CompanySize, c.CompanyUrl AS Website, c.HasMentor, c.HasProfDev, c.ContactNotes,
-                                               p.CompanyId, 
-                                               p.Title AS Position, 
+                    cmd.CommandText = @"SELECT c.Id, c.Name AS Company, c.Title, c.CompanySize, c.CompanyUrl AS Website, c.HasMentor, c.HasProfDev, 
                                                u.Id
                                         FROM Company c
                                         LEFT JOIN Position p ON c.Id = p.CompanyId
-                                        LEFT JOIN Application a ON a.PositionId = p.Id
                                         LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
                                         WHERE a.UserProfileId = @userId";
 
@@ -81,7 +79,6 @@ namespace GoodCompanyMVC.Repositories
                             HasMentor = DbUtils.GetBoolean(reader, "HasMentor"),
                             HasProfDev = DbUtils.GetBoolean(reader, "HasProfDev"),
                             CompanyUrl = DbUtils.GetString(reader, "Website"),
-                            ContactNotes = DbUtils.GetString(reader, "ContactNotes"),
                         };
                         companies.Add(company);
                         return companies;

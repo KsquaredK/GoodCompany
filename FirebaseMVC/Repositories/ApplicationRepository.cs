@@ -55,7 +55,28 @@ namespace GoodCompanyMVC.Repositories
 
         public void AddApplication(Application application)
         {
-            throw new NotImplementedException();
+
+            //using (var conn = Connection)
+            //{
+            //    conn.Open();
+            //    using (var cmd = conn.CreateCommand())
+            //    {
+            //        cmd.CommandText = @"
+            //        INSERT INTO Application (DateApplied, CompanyUrl, ContactNotes, HasMentor, HasProfDev)
+            //        OUTPUT INSERTED.ID
+            //        VALUES (@Name, @CompanySize, @CompanyUrl, @ContactNotes, @HasMentor, @HasProfDev);
+            //        ";
+
+            //        cmd.Parameters.AddWithValue("@Name", company.Name);
+            //        cmd.Parameters.AddWithValue("@CompanySize", company.CompanySize);
+            //        cmd.Parameters.AddWithValue("@CompanyUrl", company.CompanyUrl);
+            //        cmd.Parameters.AddWithValue("@ContactNotes", company.ContactNotes);
+            //        cmd.Parameters.AddWithValue("@HasMentor", company.HasMentor);
+            //        cmd.Parameters.AddWithValue("@HasProfDev", company.HasProfDev);
+
+            //        company.Id = (int)cmd.ExecuteScalar();
+            //    }
+            //}
         }
 
         public void UpdateApplication(Application application)
