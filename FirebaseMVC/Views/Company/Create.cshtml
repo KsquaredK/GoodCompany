@@ -37,11 +37,6 @@ The @*asp-forattribute is something we get from ASP.NETand razor. When the attri
                     <input asp-for="CompanyUrl" class="form-control" />
                     <span asp-validation-for="CompanyUrl" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="ContactNotes" class="control-label"></label>
-                    <input asp-for="ContactNotes" class="form-control" />
-                    <span asp-validation-for="ContactNotes" class="text-danger"></span>
-                </div>
                 <div class="form-group form-check">
                     <label class="form-check-label">
                         <input class="form-check-input" asp-for="HasMentor" /> @Html.DisplayNameFor(model => model.HasMentor)

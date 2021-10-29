@@ -5,8 +5,9 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using GoodCompanyMVC.Models;
 using System.Linq;
+using System;
 
-using GoodCompanyMVC.Models.ViewModels;
+
 
 namespace GoodCompanyMVC.Controllers
 {
@@ -14,18 +15,17 @@ namespace GoodCompanyMVC.Controllers
     public class ApplicationController : Controller
     {
         private readonly IApplicationRepository _applicationRepo;
-        private readonly IPositionRepository _positionRepo;
         private readonly ICompanyRepository _companyRepo;
         private readonly IUserProfileRepository _userRepo;
 
-        public ApplicationController(IApplicationRepository applicationRepository, IUserProfileRepository userRepository, ICompanyRepository
-          companyRepository, IPositionRepository positionRepository)
+
+        public ApplicationController(IApplicationRepository applicationRepository, 
+        IUserProfileRepository userRepository, ICompanyRepository companyRepository)
         {
             _applicationRepo = applicationRepository;
-            _positionRepo = positionRepository;
             _companyRepo = companyRepository;
             _userRepo = userRepository;
-    }
+        }
 
         // GET: ApplicationController
         public ActionResult Index()
@@ -37,7 +37,6 @@ namespace GoodCompanyMVC.Controllers
 
         public IActionResult UserIndex()
         {
-            //ApplicationViewModel vm = new ApplicationViewModel()
             var applications = _applicationRepo.GetApplications();
             var filteredApplications = applications.Where(application => application.UserProfileId == GetCurrentUserId());
 
@@ -63,7 +62,7 @@ namespace GoodCompanyMVC.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserIndex");
             }
             catch
             {
@@ -84,7 +83,7 @@ namespace GoodCompanyMVC.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserIndex");
             }
             catch
             {
@@ -105,7 +104,7 @@ namespace GoodCompanyMVC.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserIndex");
             }
             catch
             {

@@ -8,11 +8,13 @@ namespace GoodCompanyMVC.Models
 
         public int CompanyId { get; set; }
 
-        public Company company { get; set; }
+        public Company Company { get; set; }
 
         public int UserProfileId { get; set; }
 
         public UserProfile UserProfile { get; set; }
+
+        public string Title { get; set; }
 
         public DateTime DateListed { get; set; }
 

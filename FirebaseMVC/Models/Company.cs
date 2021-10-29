@@ -18,5 +18,9 @@ namespace GoodCompanyMVC.Models
         public bool HasMentor { get; set; }
 
         public bool HasProfDev { get; set; }
+
+        public UserProfile userProfile { get; set; }
+
+        public int UserProfileId { get; set; }
     }
 }
