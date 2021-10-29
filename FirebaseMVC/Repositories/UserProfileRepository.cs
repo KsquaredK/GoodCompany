@@ -21,7 +21,7 @@ namespace GoodCompanyMVC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, [Name], FirebaseUserId AS FirebaseId, DateCreated, Email
+                    cmd.CommandText = @"SELECT Id, [Name], FirebaseUserId AS FirebaseId, Email
                                        FROM UserProfile 
                                        ORDER BY Id";
 
@@ -53,7 +53,7 @@ namespace GoodCompanyMVC.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                    SELECT Id, Email, FirebaseUserId, [Name], DateCreated
+                                    SELECT Id, Email, FirebaseUserId, [Name]
                                     FROM UserProfile
                                     WHERE Id = @Id";
 
@@ -70,7 +70,6 @@ namespace GoodCompanyMVC.Repositories
                             Email = reader.GetString(reader.GetOrdinal("Email")),
                             FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
-                            DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated"))
                         };
                     }
                     reader.Close();

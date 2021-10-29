@@ -5,16 +5,11 @@ namespace GoodCompanyMVC.Repositories
 {
     public interface IApplicationRepository
     {
+        void AddAplication(Application application);
+        List<Skill> DeleteApplication(int id);
+        List<Application> GetAllApplicationsByCurrentUser(int UserProfileId);
         List<Application> GetApplications();
-
-        List<Application> GetApplicationsByCurrentUser(int userId);
-
-        Application GetApplicationById(int id);
-
-        void AddApplication(Application application);
-
+        Skill GetApplicationsById(int id);
         void UpdateApplication(Application application);
-
-        void DeleteApplication(int id);
     }
 }

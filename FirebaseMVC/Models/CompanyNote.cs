@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 
 namespace GoodCompanyMVC.Models
 {
-    public class Skill
+    public class CompanyNote
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public int CompanyId { get; set; }
 
+        public Company company { get; set; }
+
+        public string Note { get; set; }
     }
 }

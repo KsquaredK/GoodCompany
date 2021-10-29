@@ -28,8 +28,6 @@ namespace GoodCompanyMVC
             services.AddTransient<IApplicationRepository, ApplicationRepository>();
             services.AddTransient<ICompanyRepository, CompanyRepository>();
             services.AddTransient<ISkillRepository, SkillRepository>();
-            services.AddTransient<IPositionRepository, PositionRepository>();
-            services.AddTransient<IPositionSkillRepository, PositionSkillRepository>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

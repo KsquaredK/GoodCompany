@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GoodCompanyMVC.Models
 {
@@ -9,13 +6,17 @@ namespace GoodCompanyMVC.Models
     {
         public int Id { get; set; }
 
-        public int PositionId { get; set; }
+        public int CompanyId { get; set; }
 
-        public Position Position { get; set; }
+        public Company Company { get; set; }
 
         public int UserProfileId { get; set; }
 
         public UserProfile UserProfile { get; set; }
+
+        public string Title { get; set; }
+
+        public DateTime DateListed { get; set; }
 
         public DateTime DateApplied { get; set; }
 
@@ -23,8 +24,11 @@ namespace GoodCompanyMVC.Models
 
         public DateTime NextActionDue { get; set; }
 
-        public string RecommenderNotes { get; set; }
+        public int SalaryRangeLow { get; set; }
 
+        public int SalaryRangeHigh { get; set; }
+
+        public bool FullBenefits { get; set; }
     }
 }
  
