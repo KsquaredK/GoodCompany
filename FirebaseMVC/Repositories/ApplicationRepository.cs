@@ -48,56 +48,58 @@ namespace GoodCompanyMVC.Repositories
                 }
             }
         }
-        public List<Application> GetAllApplicationsByCurrentUser(int UserProfileId)
+        public List<Application> GetApplicationsByCurrentUser(int UserId)
         {
 
-            using (var conn = Connection)
+            using var conn = Connection;
+            
+            conn.Open();
+            using var cmd = conn.CreateCommand();
             {
-                conn.Open();
-                using var cmd = conn.CreateCommand();
-                {
-                    cmd.CommandText = @"SELECT a.Id, a.CompanyId, a.Title, a.DateListed, a.DateApplied,
+                cmd.CommandText = @"SELECT a.Id, a.CompanyId, a.Title, a.DateListed, a.DateApplied,
                                                         a.NextAction, a.NextActionDue, a.SalaryRangeLow, a.SalaryRangeHigh,
                                                         a.FullBenefits,
-                                                        c.Name,
+                                                        c.Name AS CompanyName,
                                                         u.Name AS UserName, u.Id AS UserId
                                                         FROM Application a 
                                                         LEFT JOIN Company c ON c.Id = a.CompanyId
                                                         LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
-                                                        WHERE u.Id = a.UserProfileId
+                                                        WHERE u.Id = @userId
                                                         ORDER BY a.NextActionDue DESC";
 
-                    var reader = cmd.ExecuteReader();
-                    var applications = new List<Application>();
+                cmd.Parameters.AddWithValue("@userId", UserId);
 
-                    while (reader.Read())
+                var reader = cmd.ExecuteReader();
+                var applications = new List<Application>();
+
+                while (reader.Read())
+                {
+                    Application application = new Application()
                     {
-                        Application application = new Application()
+                        Id = DbUtils.GetInt(reader, "Id"),
+                        Title = DbUtils.GetString(reader, "Title"),
+                        DateApplied = DbUtils.GetDateTime(reader, "DateApplied"),
+                        DateListed = DbUtils.GetDateTime(reader, "DateListed"),
+                        NextAction = DbUtils.GetString(reader, "NextAction"),
+                        NextActionDue = DbUtils.GetDateTime(reader, "NextActionDue"),
+                        SalaryRangeLow = DbUtils.GetInt(reader, "SalaryRangeLow"),
+                        SalaryRangeHigh = DbUtils.GetInt(reader, "SalaryRangeHigh"),
+                        FullBenefits = DbUtils.GetBoolean(reader, "FullBenefits"),
+                        CompanyId = DbUtils.GetInt(reader, "CompanyId"),
+                        Company = new Company()
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            Title = DbUtils.GetString(reader, "Title"),
-                            DateApplied = DbUtils.GetDateTime(reader, "DateApplied"),
-                            DateListed = DbUtils.GetDateTime(reader, "DateListed"),
-                            NextAction = DbUtils.GetString(reader, "NextAction"),
-                            NextActionDue = DbUtils.GetDateTime(reader, "NextActionDue"),
-                            SalaryRangeLow = DbUtils.GetInt(reader, "SalaryRangeLow"),
-                            SalaryRangeHigh = DbUtils.GetInt(reader, "SalaryRangeHigh"),
-                            FullBenefits = DbUtils.GetBoolean(reader, "FullBenefits"),
-                            CompanyId = DbUtils.GetInt(reader, "CompanyId"),
-                            Company = new Company()
-                            {
-                                Name = DbUtils.GetString(reader, "Name")
-                            },
-                            UserProfileId = DbUtils.GetInt(reader, "UserId"),
-                            UserProfile = new UserProfile()
-                            {
-                                Name = DbUtils.GetString(reader, "Name")
-                            },
-                        };
-                        applications.Add(application);
-                    }
+                            Name = DbUtils.GetString(reader, "CompanyName")
+                        },
+                        UserProfileId = DbUtils.GetInt(reader, "UserId"),
+                        UserProfile = new UserProfile()
+                        {
+                            Name = DbUtils.GetString(reader, "UserName")
+                        },
+                    };
+                    applications.Add(application);
                     return applications;
                 }
+                return applications;
             }
         }
 

@@ -37,10 +37,10 @@ namespace GoodCompanyMVC.Controllers
 
         public IActionResult UserIndex()
         {
-            var applications = _applicationRepo.GetApplications();
-            var filteredApplications = applications.Where(application => application.UserProfileId == GetCurrentUserId());
+            int userId = GetCurrentUserId();
+            var applications = _applicationRepo.GetApplicationsByCurrentUser(userId);
 
-            return View(filteredApplications);
+            return View(applications);
         }
 
         // GET: ApplicationController/Details/5

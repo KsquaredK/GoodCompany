@@ -53,7 +53,7 @@ namespace GoodCompanyMVC.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using var cmd = conn.CreateCommand();
                 {
                     cmd.CommandText = @"SELECT c.Id, c.Name AS Company, c.CompanySize, c.CompanyUrl AS Website, c.HasMentor, c.HasProfDev, 
                                                u.Id
