@@ -1,8 +1,8 @@
 ﻿using GoodCompanyMVC.Models;
 using GoodCompanyMVC.Utils;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace GoodCompanyMVC.Repositories
 {
@@ -48,62 +48,150 @@ namespace GoodCompanyMVC.Repositories
                 }
             }
         }
-        public List<Application> GetAllApplicationsByCurrentUser(int UserProfileId)
+        public List<Application> GetApplicationsByCurrentUser(int UserId)
         {
 
+            using var conn = Connection;
+            
+            conn.Open();
+            using var cmd = conn.CreateCommand();
+            {
+                cmd.CommandText = @"SELECT a.Id, a.CompanyId, a.Title, a.DateListed, a.DateApplied,
+                                        a.NextAction, a.NextActionDue, a.SalaryRangeLow, a.SalaryRangeHigh,
+                                        a.FullBenefits,
+                                        c.Name AS CompanyName,
+                                        u.Name AS UserName, u.Id AS UserId
+                                    FROM Application a 
+                                    LEFT JOIN Company c ON c.Id = a.CompanyId
+                                    LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
+                                    WHERE u.Id = @userId
+                                    ORDER BY a.NextActionDue DESC";
+
+                cmd.Parameters.AddWithValue("@userId", UserId);
+
+                var reader = cmd.ExecuteReader();
+                var applications = new List<Application>();
+
+                while (reader.Read())
+                {
+                    Application application = new Application()
+                    {
+                        Id = DbUtils.GetInt(reader, "Id"),
+                        Title = DbUtils.GetString(reader, "Title"),
+                        DateApplied = DbUtils.GetDateTime(reader, "DateApplied"),
+                        DateListed = DbUtils.GetDateTime(reader, "DateListed"),
+                        NextAction = DbUtils.GetString(reader, "NextAction"),
+                        NextActionDue = DbUtils.GetDateTime(reader, "NextActionDue"),
+                        SalaryRangeLow = DbUtils.GetInt(reader, "SalaryRangeLow"),
+                        SalaryRangeHigh = DbUtils.GetInt(reader, "SalaryRangeHigh"),
+                        FullBenefits = DbUtils.GetBoolean(reader, "FullBenefits"),
+                        CompanyId = DbUtils.GetInt(reader, "CompanyId"),
+                        Company = new Company()
+                        {
+                            Name = DbUtils.GetString(reader, "CompanyName")
+                        },
+                        UserProfileId = DbUtils.GetInt(reader, "UserId"),
+                        UserProfile = new UserProfile()
+                        {
+                            Name = DbUtils.GetString(reader, "UserName")
+                        },
+                    };
+                    applications.Add(application);
+                    return applications;
+                }
+                return applications;
+            }
+        }
+
+
+
+        public Application GetApplicationById(int id)
+        {
             using (var conn = Connection)
             {
                 conn.Open();
                 using var cmd = conn.CreateCommand();
                 {
-                    cmd.CommandText = @"SELECT a.Id, a.CompanyId, a.Title, a.DateListed, a.DateApplied,
-                                                        a.NextAction, a.NextActionDue, a.SalaryRangeLow, a.SalaryRangeHigh,
-                                                        a.FullBenefits,
-                                                        c.Name,
-                                                        u.Name AS UserName, u.Id AS UserId
-                                                        FROM Application a 
-                                                        LEFT JOIN Company c ON c.Id = a.CompanyId
-                                                        LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
-                                                        WHERE u.Id = a.UserProfileId
-                                                        ORDER BY a.NextActionDue DESC";
+                    cmd.CommandText = @"SELECT a.Id AS Id, a.CompanyId, a.Title, a.DateListed, a.DateApplied,
+                                        a.NextAction, a.NextActionDue, a.SalaryRangeLow, a.SalaryRangeHigh,
+                                        a.FullBenefits,
+                                        c.Name AS CompanyName,
+                                        u.Name AS UserName, u.Id AS UserId
+                                    FROM Application a 
+                                    LEFT JOIN Company c ON c.Id = a.CompanyId
+                                    LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
+                                    WHERE a.Id = @Id";
 
-                    var reader = cmd.ExecuteReader();
-                    var applications = new List<Application>();
+                    cmd.Parameters.AddWithValue("@Id", id);
 
-                    while (reader.Read())
+                    Application application = null;
+                    using var reader = cmd.ExecuteReader();
                     {
-                        Application application = new Application()
+                        while (reader.Read())
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            Title = DbUtils.GetString(reader, "Title"),
-                            DateApplied = DbUtils.GetDateTime(reader, "DateApplied"),
-                            DateListed = DbUtils.GetDateTime(reader, "DateListed"),
-                            NextAction = DbUtils.GetString(reader, "NextAction"),
-                            NextActionDue = DbUtils.GetDateTime(reader, "NextActionDue"),
-                            SalaryRangeLow = DbUtils.GetInt(reader, "SalaryRangeLow"),
-                            SalaryRangeHigh = DbUtils.GetInt(reader, "SalaryRangeHigh"),
-                            FullBenefits = DbUtils.GetBoolean(reader, "FullBenefits"),
-                            CompanyId = DbUtils.GetInt(reader, "CompanyId"),
-                            Company = new Company()
+                            if (application == null)
                             {
-                                Name = DbUtils.GetString(reader, "Name")
-                            },
-                            UserProfileId = DbUtils.GetInt(reader, "UserId"),
-                            UserProfile = new UserProfile()
-                            {
-                                Name = DbUtils.GetString(reader, "Name")
-                            },
-                        };
-                        applications.Add(application);
+                                application = new Application
+                                {
+                                    Id = DbUtils.GetInt(reader, "Id"),
+                                    Title = DbUtils.GetString(reader, "Title"),
+                                    DateApplied = DbUtils.GetDateTime(reader, "DateApplied"),
+                                    DateListed = DbUtils.GetDateTime(reader, "DateListed"),
+                                    NextAction = DbUtils.GetString(reader, "NextAction"),
+                                    NextActionDue = DbUtils.GetDateTime(reader, "NextActionDue"),
+                                    SalaryRangeLow = DbUtils.GetInt(reader, "SalaryRangeLow"),
+                                    SalaryRangeHigh = DbUtils.GetInt(reader, "SalaryRangeHigh"),
+                                    FullBenefits = DbUtils.GetBoolean(reader, "FullBenefits"),
+                                    CompanyId = DbUtils.GetInt(reader, "CompanyId"),
+                                    Company = new Company()
+                                    {
+                                        Name = DbUtils.GetString(reader, "CompanyName")
+                                    },
+                                    UserProfileId = DbUtils.GetInt(reader, "UserId"),
+                                    UserProfile = new UserProfile()
+                                    {
+                                        Name = DbUtils.GetString(reader, "UserName")
+                                    },
+                                };
+                            }
+                        }
+                        return application;
                     }
-                    return applications;
                 }
             }
         }
 
-        public void AddAplication(Application application)
+        public void AddApplication(Application application)
         {
-            throw new NotImplementedException();
+            using (var conn = Connection)
+                {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Application (CompanyId, UserProfileId,
+                                    Title, DateListed, DateApplied, NextAction,
+                                    NextActionDue, SalaryRangeLow, SalaryRangeHigh,
+                                    FullBenefits)
+                        OUTPUT INSERTED.ID
+                        VALUES (@CompanyId, @UserProfileId, @Title,
+                                @DateListed, @DateApplied, @NextAction, @NextActionDue,
+                                @SalaryRangeLow, @SalaryRangeHigh, @FullBenefits); ";
+
+                    cmd.Parameters.AddWithValue("@CompanyId", application.CompanyId);
+                    cmd.Parameters.AddWithValue("@UserProfileId", application.UserProfileId);
+                    cmd.Parameters.AddWithValue("@Title", application.Title);
+                    cmd.Parameters.AddWithValue("@DateApplied", DbUtils.ValueOrDBNull(application.DateApplied));
+                    cmd.Parameters.AddWithValue("@NextAction", application.NextAction);
+                    cmd.Parameters.AddWithValue("@NextActionDue", application.NextActionDue);
+                    cmd.Parameters.AddWithValue("@DateListed", application.DateListed);
+                    cmd.Parameters.AddWithValue("@SalaryRangeLow", DbUtils.ValueOrDBNull(application.SalaryRangeLow));
+                    cmd.Parameters.AddWithValue("@SalaryRangeHigh", DbUtils.ValueOrDBNull(application.SalaryRangeHigh));
+                    cmd.Parameters.AddWithValue("@FullBenefits", DbUtils.ValueOrDBNull(application.FullBenefits));
+
+                    application.Id = (int)cmd.ExecuteScalar();
+                }
+            }
         }
 
         public void UpdateApplication(Application application)
@@ -111,12 +199,7 @@ namespace GoodCompanyMVC.Repositories
             throw new NotImplementedException();
         }
 
-        public Skill GetApplicationsById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Skill> DeleteApplication(int id)
+        public void DeleteApplication(int id)
         {
             throw new NotImplementedException();
         }

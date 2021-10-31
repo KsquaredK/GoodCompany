@@ -1,0 +1,68 @@
+﻿@model GoodCompanyMVC.Models.Application
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add New</h1>
+
+<h4>Application</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Job Title</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NextAction" class="control-label">Next Action</label>
+                <input asp-for="NextAction" class="form-control" />
+                <span asp-validation-for="NextAction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NextActionDue" class="control-label">Next Action Due</label>
+                <input asp-for="NextActionDue" class="form-control" />
+                <span asp-validation-for="NextActionDue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateListed" class="control-label">First Listed</label>
+                <input asp-for="DateListed" class="form-control" />
+                <span asp-validation-for="DateListed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalaryRangeLow" class="control-label">Salary Range (Bottom)</label>
+                <input asp-for="SalaryRangeLow" class="form-control" />
+                <span asp-validation-for="SalaryRangeLow" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalaryRangeHigh" class="control-label">Salary Range (Top)</label>
+                <input asp-for="SalaryRangeHigh" class="form-control" />
+                <span asp-validation-for="SalaryRangeHigh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FullBenefits" class="control-label">Full Benefits?</label>
+                <input asp-for="FullBenefits" class="form-control" />
+                <span asp-validation-for="FullBenefits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateApplied" class="control-label">Date Applied</label>
+                <input asp-for="DateApplied" class="form-control" />
+                <span asp-validation-for="DateApplied" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="UserIndex">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

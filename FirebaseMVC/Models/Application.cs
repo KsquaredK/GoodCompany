@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodCompanyMVC.Models
 {
@@ -14,21 +16,31 @@ namespace GoodCompanyMVC.Models
 
         public UserProfile UserProfile { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
+        [Required]
+        [DisplayName("Date Listed")]
+        [DataType(DataType.Date)]
         public DateTime DateListed { get; set; }
 
-        public DateTime DateApplied { get; set; }
+        [DisplayName("Date Applied")]
+        [DataType(DataType.Date)]
+        public DateTime? DateApplied { get; set; }
 
+        [Required]
         public string NextAction { get; set; }
 
+        [Required]
+        [DisplayName("Next Action Due")]
+        [DataType(DataType.Date)]
         public DateTime NextActionDue { get; set; }
 
-        public int SalaryRangeLow { get; set; }
+        public int? SalaryRangeLow { get; set; }
 
-        public int SalaryRangeHigh { get; set; }
+        public int? SalaryRangeHigh { get; set; }
 
-        public bool FullBenefits { get; set; }
+        public bool? FullBenefits { get; set; }
     }
 }
  

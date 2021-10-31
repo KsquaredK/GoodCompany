@@ -53,7 +53,7 @@ namespace GoodCompanyMVC.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using var cmd = conn.CreateCommand();
                 {
                     cmd.CommandText = @"SELECT c.Id, c.Name AS Company, c.CompanySize, c.CompanyUrl AS Website, c.HasMentor, c.HasProfDev, 
                                                u.Id
@@ -97,13 +97,13 @@ namespace GoodCompanyMVC.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                      SELECT  c.Id, c.Name, c.CompanyUrl, c.CompanyUrl AS Website, c.HasMentor, c.HasProfDev,
+                      SELECT  c.Id, c.Name, c.CompanyUrl, c.CompanyUrl AS Website, 
+                              c.HasMentor, c.HasProfDev,
                               u.Id AS UserId
                       FROM Company c
                       LEFT JOIN Application a ON a.CompanyId = c.Id
                       LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
-                      WHERE c.Id = @id
-                      ORDER BY c.Name ASC";
+                      WHERE c.Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
 

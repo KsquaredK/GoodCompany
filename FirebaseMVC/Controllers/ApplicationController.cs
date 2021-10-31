@@ -37,16 +37,21 @@ namespace GoodCompanyMVC.Controllers
 
         public IActionResult UserIndex()
         {
-            var applications = _applicationRepo.GetApplications();
-            var filteredApplications = applications.Where(application => application.UserProfileId == GetCurrentUserId());
+            int userId = GetCurrentUserId();
+            var applications = _applicationRepo.GetApplicationsByCurrentUser(userId);
 
-            return View(filteredApplications);
+            return View(applications);
         }
 
         // GET: ApplicationController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Application application = _applicationRepo.GetApplicationById(id);
+            if (application == null)
+            {
+                return NotFound();
+            }
+            return View(application);
         }
 
         // GET: ApplicationController/Create
@@ -60,14 +65,20 @@ namespace GoodCompanyMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Application application)
         {
-            try
-            {
-                return RedirectToAction("UserIndex");
-            }
-            catch
-            {
-                return View();
-            }
+            List<Application> applications = _applicationRepo.GetApplications();
+         
+                try
+                {
+                    _applicationRepo.AddApplication(application);
+                    //Redirect to updated list view
+                    return RedirectToAction("UserIndex");
+                }
+                catch (Exception ex)
+                {
+                    //Or, if submission fails, return to empty form view
+                    return View(application);
+                }
+            
         }
 
         // GET: ApplicationController/Edit/5
