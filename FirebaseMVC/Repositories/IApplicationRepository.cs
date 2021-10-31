@@ -9,12 +9,14 @@ namespace GoodCompanyMVC.Repositories
 
         List<Application> GetApplicationsByCurrentUser(int UserProfileId);
 
-        Skill GetApplicationsById(int id);
+        Application GetApplicationById(int id);
 
-        void AddAplication(Application application);
+        void AddApplication(Application application);
+
 
         void UpdateApplication(Application application);
 
-        List<Skill> DeleteApplication(int id);
+
+        void DeleteApplication(int id);
     }
 }

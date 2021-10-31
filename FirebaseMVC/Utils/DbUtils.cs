@@ -128,5 +128,11 @@ namespace GoodCompanyMVC.Utils
                 cmd.Parameters.AddWithValue(name, value);
             }
         }
+
+        public static object ValueOrDBNull(object value)
+        {
+            return value ?? DBNull.Value;
+        }
+
     }
 }
