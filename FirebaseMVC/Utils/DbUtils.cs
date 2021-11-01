@@ -129,6 +129,16 @@ namespace GoodCompanyMVC.Utils
             }
         }
 
+        public static bool? GetNullableBool(SqlDataReader reader, string column)
+        {
+            var ordinal = reader.GetOrdinal(column);
+            if (reader.IsDBNull(ordinal))
+            {
+                return null;
+            }
+
+            return reader.GetBoolean(ordinal);
+        }
         public static object ValueOrDBNull(object value)
         {
             return value ?? DBNull.Value;
