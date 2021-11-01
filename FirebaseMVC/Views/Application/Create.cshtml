@@ -1,4 +1,4 @@
-﻿@model GoodCompanyMVC.Models.Application
+﻿@model GoodCompanyMVC.Models.ViewModels.ApplicationCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -12,45 +12,70 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="Application.Company.Name" class="control-label">Company Name</label>
+                <input asp-for="Application.Company.Name" type = "hidden" />
+                <span asp-validation-for="Application.Company.Name" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
-                <label asp-for="Title" class="control-label">Job Title</label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Application.CompanyId" class="control-label">Company Name</label>
+                <select asp-for="Application.CompanyId" class="form-control">
+                    @foreach (var company in Model.CompanyOptions)
+                    {
+                        <option value="@company.Id">@company.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Application.CompanyId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NextAction" class="control-label">Next Action</label>
-                <input asp-for="NextAction" class="form-control" />
-                <span asp-validation-for="NextAction" class="text-danger"></span>
+                <label asp-for="Application.Title" class="control-label">Job Title</label>
+                <input asp-for="Application.Title" class="form-control" />
+                <span asp-validation-for="Application.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NextActionDue" class="control-label">Next Action Due</label>
-                <input asp-for="NextActionDue" class="form-control" />
-                <span asp-validation-for="NextActionDue" class="text-danger"></span>
+                <label asp-for="Application.NextAction" class="control-label">Next Action</label>
+                <input asp-for="Application.NextAction" class="form-control" />
+                <span asp-validation-for="Application.NextAction" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateListed" class="control-label">First Listed</label>
-                <input asp-for="DateListed" class="form-control" />
-                <span asp-validation-for="DateListed" class="text-danger"></span>
+                <label asp-for="Application.NextActionDue" class="control-label">Next Action Due</label>
+                <input asp-for="Application.NextActionDue" class="form-control" />
+                <span asp-validation-for="Application.NextActionDue" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SalaryRangeLow" class="control-label">Salary Range (Bottom)</label>
-                <input asp-for="SalaryRangeLow" class="form-control" />
-                <span asp-validation-for="SalaryRangeLow" class="text-danger"></span>
+                <label asp-for="Application.PositionLevelId" class="control-label">Position Level</label>
+                <select asp-for="Application.PositionLevelId" class="form-control">
+                    @foreach (var positionLevel in Model.PositionLevelOptions)
+                    {
+                        <option value="@positionLevel.Id">@positionLevel.Level</option>
+                    }
+                </select>
+                <span asp-validation-for="Application.PositionLevelId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SalaryRangeHigh" class="control-label">Salary Range (Top)</label>
-                <input asp-for="SalaryRangeHigh" class="form-control" />
-                <span asp-validation-for="SalaryRangeHigh" class="text-danger"></span>
+                <label asp-for="Application.DateListed" class="control-label">First Listed</label>
+                <input asp-for="Application.DateListed" class="form-control" />
+                <span asp-validation-for="Application.DateListed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FullBenefits" class="control-label">Full Benefits?</label>
-                <input asp-for="FullBenefits" class="form-control" />
-                <span asp-validation-for="FullBenefits" class="text-danger"></span>
+                <label asp-for="Application.SalaryRangeLow" class="control-label">Salary Range (Bottom)</label>
+                <input asp-for="Application.SalaryRangeLow" class="form-control" />
+                <span asp-validation-for="Application.SalaryRangeLow" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateApplied" class="control-label">Date Applied</label>
-                <input asp-for="DateApplied" class="form-control" />
-                <span asp-validation-for="DateApplied" class="text-danger"></span>
+                <label asp-for="Application.SalaryRangeHigh" class="control-label">Salary Range (Top)</label>
+                <input asp-for="Application.SalaryRangeHigh" class="form-control" />
+                <span asp-validation-for="Application.SalaryRangeHigh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.FullBenefits" class="control-label">Full Benefits?</label>
+                <input asp-for="Application.FullBenefits" class="form-control" />
+                <span asp-validation-for="Application.FullBenefits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.DateApplied" class="control-label">Date Applied</label>
+                <input asp-for="Application.DateApplied" class="form-control" />
+                <span asp-validation-for="Application.DateApplied" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

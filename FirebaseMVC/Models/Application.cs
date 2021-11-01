@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,6 +16,12 @@ namespace GoodCompanyMVC.Models
         public int UserProfileId { get; set; }
 
         public UserProfile UserProfile { get; set; }
+
+        public int PositionLevelId { get; set; }
+
+        public Positionlevel PositionLevel { get; set; }
+
+        public List<Skill> Skills { get; set; }
 
         [Required]
         public string Title { get; set; }

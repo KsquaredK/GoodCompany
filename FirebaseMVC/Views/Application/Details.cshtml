@@ -1,7 +1,7 @@
-﻿@model GoodCompanyMVC.Models.Application
+﻿@model GoodCompanyMVC.Models.ViewModels.ApplicationViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = $"Application - {Model.Application.Title}";
 }
 
 <h1>Details</h1>
@@ -9,63 +9,95 @@
 <div class="container pt-5">
     <div class="company">
         <div class="row justify-content-between">
-            <h1>@Model.Title</h1>
+            <h1>@Model.Application.Title</h1>
         </div>
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Company.Name)
+                @Html.DisplayNameFor(model => model.Application.Company.Name)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Company.Name)
+                @Html.DisplayFor(model => model.Application.Company.Name)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.NextActionDue)
+                @Html.DisplayNameFor(model => model.Application.NextActionDue)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.NextActionDue)
+                @Html.DisplayFor(model => model.Application.NextActionDue)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.NextAction)
+                @Html.DisplayNameFor(model => model.Application.NextAction)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.NextAction)
+                @Html.DisplayFor(model => model.Application.NextAction)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DateApplied)
+                @Html.DisplayNameFor(model => model.Application.DateApplied)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DateApplied)
+                @Html.DisplayFor(model => model.Application.DateApplied)
+            </dd>
+            <div class="justify-content-end">
+                <h4>Skills:</h4>
+                <p>
+                    @if (Model.Application.Skills == null)
+                    {
+                        <text>None</text>
+                    }
+                    else
+                    {
+                        @foreach (Skill s in Model.Application.Skills)
+                        {
+                            @s.Name;
+                            <br />
+                        }
+                    }
+                </p>
+            </div>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Application.SalaryRangeLow)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Application.SalaryRangeLow)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.SalaryRangeLow)
+                @Html.DisplayNameFor(model => model.Application.SalaryRangeHigh)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.SalaryRangeLow)
+                @Html.DisplayFor(model => model.Application.SalaryRangeHigh)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.SalaryRangeHigh)
+                @Html.DisplayNameFor(model => model.Application.FullBenefits)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.SalaryRangeHigh)
+                @Html.DisplayFor(model => model.Application.FullBenefits)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FullBenefits)
+                @Html.DisplayNameFor(model => model.Application.DateListed)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FullBenefits)
+                @Html.DisplayFor(model => model.Application.DateListed)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DateListed)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DateListed)
-            </dd>
+            @*<div class="justify-content-end">
+                <h6>Skills:</h6>
+                    @if (Model.Application.Skills == null)
+                    {
+                        <text>None</text>
+                    }
+                    else
+                    {
+                        @foreach (Skill s in Model.Application.Skills)
+                        {
+                            @s.Name;
+                            <br />
+                        }
+                    }
+            </div>*@
         </dl>
     </div>
     <div>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Application.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Application.Id }) |
         <a asp-action="UserIndex">Back to List</a>
     </div>
 </div>

@@ -6,10 +6,17 @@ namespace GoodCompanyMVC.Repositories
     public interface ISkillRepository
     {
         void AddSkill(Skill skill);
-        List<Skill> DeleteSkill(int id);
-        List<Skill> GetAllSkills();
-        List<Skill> GetAllSkillsByCurrentUser(int UserProfileId);
-        Skill GetSkillsById(int id);
+
+        void DeleteSkill(int id);
+
+        List<Skill> GetSkills();
+
+        List<Skill> GetSkillsByCurrentUser(int UserProfileId);
+
+        List<Skill> GetSkillsByApplication(int applicationId);
+
+        Skill GetSkillById(int id);
+
         void UpdateSkill(Skill skill);
     }
 }
