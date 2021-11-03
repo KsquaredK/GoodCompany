@@ -1407,8 +1407,9 @@ a.bg-danger:focus {
 }
 ul,
 ol {
-  margin-top: 0;
-  margin-bottom: 9px;
+    margin-top: 0;
+    margin-bottom: 9px;
+    list-style: none;
 }
 ul ul,
 ol ul,
@@ -1429,6 +1430,8 @@ ol ol {
   display: inline-block;
   padding-right: 5px;
   padding-left: 5px;
+  list-style-type: none;
+  list-style-type: none;
 }
 dl {
   margin-top: 0;
@@ -3929,7 +3932,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 30px 15px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -4453,8 +4456,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #d9230f;
-  background-color: transparent;
+color: #d9230f;
+background-color: transparent;
+list-style: none;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -4545,7 +4549,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #fac0ba;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #fac0ba;
+color: #fac0ba;
+list-style: none;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
