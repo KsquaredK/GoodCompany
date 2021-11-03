@@ -1,9 +1,10 @@
 ﻿using GoodCompanyMVC.Repositories;
+using GoodCompanyMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Collections.Generic;
-using GoodCompanyMVC.Models;
+
 using System.Linq;
 using System;
 

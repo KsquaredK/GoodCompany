@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Data.SqlClient;
 
 namespace GoodCompanyMVC.Utils
@@ -143,6 +144,11 @@ namespace GoodCompanyMVC.Utils
         {
             return value ?? DBNull.Value;
         }
+
+        //public static string ExternalLink(this HtmlHelper helper, string URI, string label)
+        //{
+        //    return string.Format("<a href='{0}'>{1}</a>", URI, label);
+        //}
 
     }
 }

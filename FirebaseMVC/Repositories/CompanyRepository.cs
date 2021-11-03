@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Data.SqlClient;
 using GoodCompanyMVC.Models;
 using GoodCompanyMVC.Utils;
 
