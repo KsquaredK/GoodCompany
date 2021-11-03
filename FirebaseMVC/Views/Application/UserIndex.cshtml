@@ -4,7 +4,7 @@
     ViewData["Title"] = "UserIndex";
 }
 
-<h1>Applications</h1>
+<h1>Application Tracker</h1>
 
 <p>
     <a asp-action="Create">Add New Application</a>
@@ -41,7 +41,7 @@
                     @Html.DisplayFor(modelItem => item.Company.Name)
                 </td>
                 <td>
-                    @*@Html.DisplayFor(modelItem => item.NextActionDue)*@
+                    @Html.DisplayFor(modelItem => item.NextActionDue)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

@@ -65,7 +65,7 @@ namespace GoodCompanyMVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Application}/{action=Index}/{id?}");
             });
         }
     }

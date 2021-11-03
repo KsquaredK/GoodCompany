@@ -11,10 +11,12 @@ namespace GoodCompanyMVC.Controllers
     public class HomeController : Controller
     {
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IApplicationRepository _applicationRepository;
 
-        public HomeController(IUserProfileRepository userProfileRepository)
+        public HomeController(IUserProfileRepository userProfileRepository, IApplicationRepository applicationRepository)
         {
             _userProfileRepository = userProfileRepository;
+            _applicationRepository = applicationRepository;
         }
 
         public IActionResult Index()

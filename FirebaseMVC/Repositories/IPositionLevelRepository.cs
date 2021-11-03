@@ -5,6 +5,12 @@ namespace GoodCompanyMVC.Repositories
 {
     public interface IPositionLevelRepository
     {
-        List<Positionlevel> GetPositionLevels();
+        void AddPositionLevel(PositionLevel positionLevel);
+        void DeletePositionLevel(int id);
+        void GetPositionByApplication(int applicationId);
+        void GetPositionLevelById(int id);
+        List<PositionLevel> GetPositionLevels();
+        void GetPositionLevelsByCurrentUser(int userProfileId);
+        void UpdatePositionLevel(PositionLevel positionLevel);
     }
 }

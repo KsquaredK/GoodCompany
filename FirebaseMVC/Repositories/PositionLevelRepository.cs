@@ -1,16 +1,15 @@
-﻿using GoodCompanyMVC.Models.ViewModels;
-using GoodCompanyMVC.Models;
+﻿using GoodCompanyMVC.Models;
 using GoodCompanyMVC.Utils;
-using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace GoodCompanyMVC.Repositories
 {
     public class PositionLevelRepository : BaseRepository, IPositionLevelRepository
     {
         public PositionLevelRepository(IConfiguration config) : base(config) { }
-        public List<Positionlevel> GetPositionLevels()
+        public List<PositionLevel> GetPositionLevels()
         {
             using (var conn = Connection)
             {
@@ -21,11 +20,11 @@ namespace GoodCompanyMVC.Repositories
 
                     var reader = cmd.ExecuteReader();
 
-                    List<Positionlevel> positionLevels = new List<Positionlevel>();
+                    List<PositionLevel> positionLevels = new List<PositionLevel>();
 
                     while (reader.Read())
                     {
-                        Positionlevel positionLevel = new Positionlevel()
+                        PositionLevel positionLevel = new PositionLevel()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             Level = DbUtils.GetString(reader, "Level")
@@ -41,6 +40,36 @@ namespace GoodCompanyMVC.Repositories
             }
 
 
+        }
+
+        public void GetPositionLevelsByCurrentUser(int userProfileId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void GetPositionByApplication(int applicationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetPositionLevelById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddPositionLevel(PositionLevel positionLevel)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdatePositionLevel(PositionLevel positionLevel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeletePositionLevel(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -97,7 +97,7 @@ namespace GoodCompanyMVC.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                      SELECT  c.Id, c.Name, c.CompanyUrl, c.CompanyUrl AS Website, 
+                      SELECT  c.Id, c.Name, c.CompanySize, c.CompanyUrl AS Website, 
                               c.HasMentor, c.HasProfDev,
                               u.Id AS UserId
                       FROM Company c
@@ -120,7 +120,8 @@ namespace GoodCompanyMVC.Repositories
                                 {
                                     Id = DbUtils.GetInt(reader, "Id"),
                                     Name = DbUtils.GetString(reader, "Name"),
-                                    CompanyUrl = DbUtils.GetString(reader, "CompanyUrl"),
+                                    CompanySize = DbUtils.GetString(reader, "CompanySize"),
+                                    CompanyUrl = DbUtils.GetString(reader, "Website"),
                                     HasMentor = DbUtils.GetBoolean(reader, "HasMentor"),
                                     HasProfDev = DbUtils.GetBoolean(reader, "HasProfDev")
                                 };

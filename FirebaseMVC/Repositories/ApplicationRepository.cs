@@ -114,6 +114,7 @@ namespace GoodCompanyMVC.Repositories
                 {
                     cmd.CommandText = @"SELECT a.Id AS Id, a.CompanyId, a.Title, a.DateListed, a.DateApplied,
                                             a.NextAction, a.NextActionDue, a.SalaryRangeLow, a.SalaryRangeHigh,
+                                            a.PositionLevelId,
                                             a.FullBenefits,
                                             c.Name AS CompanyName,
                                             u.Name AS UserName, u.Id AS UserId
@@ -136,6 +137,7 @@ namespace GoodCompanyMVC.Repositories
                                     Id = DbUtils.GetInt(reader, "Id"),
                                     Title = DbUtils.GetString(reader, "Title"),
                                     DateApplied = DbUtils.GetNullableDateTime(reader, "DateApplied"),
+                                    PositionLevelId = DbUtils.GetInt(reader, "PositionLevelId"),
                                     DateListed = DbUtils.GetDateTime(reader, "DateListed"),
                                     NextAction = DbUtils.GetString(reader, "NextAction"),
                                     NextActionDue = DbUtils.GetDateTime(reader, "NextActionDue"),
@@ -205,24 +207,24 @@ namespace GoodCompanyMVC.Repositories
                     cmd.CommandText = @"
                         UPDATE Application
                         SET 
-                            CompanyId = @companyId,
-                            UserProfileId = @userProfileId,
-                            PositionLevelId = @positionLevelId,
-                            Title = @title, 
-                            DateListed = @dateListed,
-                            DateApplied = @dateApplied,
-                            NextAction = @nextAction,
-                            NextActionDue = @nextActionDue,
-                            SalaryRangeLow = @salaryRangeLow,
-                            SalaryRangeHigh = @salaryRangeHigh,
-                            FullBenefits = @fullBenefits
-                        WHERE Id = @id";
+                            CompanyId = @CompanyId,
+                            UserProfileId = @UserProfileId,
+                            PositionLevelId = @PositionLevelId,
+                            Title = @Title, 
+                            DateListed = @DateListed,
+                            DateApplied = @DateApplied,
+                            NextAction = @NextAction,
+                            NextActionDue = @NextActionDue,
+                            SalaryRangeLow = @SalaryRangeLow,
+                            SalaryRangeHigh = @SalaryRangeHigh,
+                            FullBenefits = @FullBenefits
+                        WHERE Id = @Id";
 
                     cmd.Parameters.AddWithValue("@Id", application.Id);
                     cmd.Parameters.AddWithValue("@CompanyId", application.CompanyId);
                     cmd.Parameters.AddWithValue("@UserProfileId", application.UserProfileId);
-                    cmd.Parameters.AddWithValue("@PositionLevelId", 3);
-                    cmd.Parameters.AddWithValue("@Title", application.CompanyId);
+                    cmd.Parameters.AddWithValue("@PositionLevelId", application.PositionLevelId);
+                    cmd.Parameters.AddWithValue("@Title", application.Title);
                     cmd.Parameters.AddWithValue("@DateListed", application.DateListed);
                     cmd.Parameters.AddWithValue("@NextAction", application.NextAction);
                     cmd.Parameters.AddWithValue("@NextActionDue", application.NextActionDue);

@@ -1,10 +1,10 @@
-﻿using GoodCompanyMVC.Repositories;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Collections.Generic;
+using GoodCompanyMVC.Repositories;
 using GoodCompanyMVC.Models;
-using System;
 using GoodCompanyMVC.Models.ViewModels;
 
 namespace GoodCompanyMVC.Controllers
@@ -69,10 +69,10 @@ namespace GoodCompanyMVC.Controllers
         public ActionResult Create()
         {
             List<Company> companies = _companyRepo.GetCompanies();
-            List<Positionlevel> positionLevels = _positionLevelRepo.GetPositionLevels();
+            List<PositionLevel> positionLevels = _positionLevelRepo.GetPositionLevels();
             List<Skill> skills = _skillRepo.GetSkills();
 
-            ApplicationCreateViewModel vm = new ApplicationCreateViewModel()
+            ApplicationFormViewModel vm = new ApplicationFormViewModel()
             {
                 Application = new Application(),
                 CompanyOptions = companies,
@@ -88,7 +88,7 @@ namespace GoodCompanyMVC.Controllers
         // POST: ApplicationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ApplicationCreateViewModel vm)
+        public ActionResult Create(ApplicationFormViewModel vm)
         {
             try
             {
@@ -103,48 +103,43 @@ namespace GoodCompanyMVC.Controllers
                 return View(vm);
             }
         }
-                //******try catch for using Model instead of ViewModel:
-                //try
-                //{
-                //    application.UserProfileId = GetCurrentUserId();
-                //    _applicationRepo.AddApplication(application);
-                //    //Redirect to updated list view
-                //    return RedirectToAction("UserIndex");
-                //}
-                //catch (Exception ex)
-                //{
-                //    //Or, if submission fails, return to empty form view
-                //    return View(application);
-                //}
 
-
-            
-        
 
         // GET: ApplicationController/Edit/5
         public ActionResult Edit(int id)
         {
-            Application application = _applicationRepo.GetApplicationById(id);
-            if (application == null)
+            List<Company> companies = _companyRepo.GetCompanies();
+            List<PositionLevel> positionLevels = _positionLevelRepo.GetPositionLevels();
+            List<Skill> skills = _skillRepo.GetSkills();
+
+            ApplicationFormViewModel vm = new ApplicationFormViewModel()
+            {
+                Application = _applicationRepo.GetApplicationById(id),
+                CompanyOptions = companies,
+                PositionLevelOptions = positionLevels,
+                Skills = skills
+            };
+
+            if (vm == null)
             {
                 return NotFound();
             }
-            return View(application);
+            return View(vm);
         }
 
         // POST: ApplicationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Application application)
+        public ActionResult Edit(int id, ApplicationFormViewModel vm)
         {
             try
             {
-                _applicationRepo.UpdateApplication(application);
+                _applicationRepo.UpdateApplication(vm.Application);
                 return RedirectToAction("UserIndex");
             }
             catch (Exception ex)
             {
-                return View(application);
+                return View(vm);
             }
         }
 

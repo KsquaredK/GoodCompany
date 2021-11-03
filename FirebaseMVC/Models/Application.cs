@@ -19,7 +19,7 @@ namespace GoodCompanyMVC.Models
 
         public int PositionLevelId { get; set; }
 
-        public Positionlevel PositionLevel { get; set; }
+        public PositionLevel PositionLevel { get; set; }
 
         public List<Skill> Skills { get; set; }
 

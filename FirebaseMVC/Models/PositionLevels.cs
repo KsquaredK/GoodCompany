@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GoodCompanyMVC.Models
 {
-    public class Positionlevel
+    public class PositionLevel
     {
         public int Id { get; set; }
 

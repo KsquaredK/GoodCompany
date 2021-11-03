@@ -107,7 +107,7 @@ namespace GoodCompanyMVC.Controllers
         {
 
                 _companyRepo.UpdateCompany(company);
-                    return RedirectToAction("UserIndex");
+                    return RedirectToAction("Index");
 
         }
 

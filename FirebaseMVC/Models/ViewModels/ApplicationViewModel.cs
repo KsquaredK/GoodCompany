@@ -9,7 +9,7 @@ namespace GoodCompanyMVC.Models.ViewModels
 
         public List<Company> Companies { get; set; }
 
-        public List<Positionlevel> PositionLevels { get; set; }
+        public List<PositionLevel> PositionLevels { get; set; }
 
         public List<ApplicationNote>  ApplicationNotes { get; set; }
 
