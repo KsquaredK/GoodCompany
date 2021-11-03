@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
-@model IEnumerable<GoodCompanyMVC.Models.Company>
+﻿@model IEnumerable<GoodCompanyMVC.Models.Company>
 
 @{
     ViewData["Title"] = "UserIndex";
@@ -32,7 +31,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                <a href="@item.CompanyUrl" alt=" " go to site">@item.Name</a>
+                <a href="@item.CompanyUrl" alt="go to site">@item.Name</a>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

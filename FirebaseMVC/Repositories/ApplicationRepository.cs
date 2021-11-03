@@ -57,14 +57,16 @@ namespace GoodCompanyMVC.Repositories
             conn.Open();
             using var cmd = conn.CreateCommand();
             {
-                cmd.CommandText = @"SELECT a.Id, a.CompanyId, a.Title, a.DateListed, a.DateApplied,
+                cmd.CommandText = @"SELECT a.Id, a.CompanyId, a.Title, a.PositionLevelId, a.DateListed, a.DateApplied,
                                         a.NextAction, a.NextActionDue, a.SalaryRangeLow, a.SalaryRangeHigh,
                                         a.FullBenefits,
+                                        p.Level,
                                         c.Name AS CompanyName,
                                         u.Name AS UserName, u.Id AS UserId
                                     FROM Application a 
                                     LEFT JOIN Company c ON c.Id = a.CompanyId
                                     LEFT JOIN UserProfile u ON u.Id = a.UserProfileId
+                                    LEFT JOIN PositionLevel p ON p.Id = a.PositionLevelId
                                     WHERE u.Id = @userId
                                     ORDER BY a.NextActionDue DESC";
 
@@ -79,6 +81,7 @@ namespace GoodCompanyMVC.Repositories
                     {
                         Id = DbUtils.GetInt(reader, "Id"),
                         Title = DbUtils.GetString(reader, "Title"),
+                        PositionLevelId = DbUtils.GetInt(reader, "PositionLevelId"),
                         DateApplied = DbUtils.GetNullableDateTime(reader, "DateApplied"),
                         DateListed = DbUtils.GetDateTime(reader, "DateListed"),
                         NextAction = DbUtils.GetString(reader, "NextAction"),
@@ -96,14 +99,19 @@ namespace GoodCompanyMVC.Repositories
                         {
                             Name = DbUtils.GetString(reader, "UserName")
                         },
+                        PositionLevel = new PositionLevel()
+                        {
+                            Level = DbUtils.GetString(reader, "Level")
+                        }
                     };
                     applications.Add(application);
                 }
+                reader.Close();
                 return applications;
             }
         }
 
-
+        
 
         public Application GetApplicationById(int id)
         {

@@ -54,7 +54,7 @@ namespace GoodCompanyMVC.Auth
                 //if valid user, log in (private)
             await LoginToApp(userProfile);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("UserIndex", "Application");
         }
         //Form where data model has specific reqs
         public IActionResult Register()

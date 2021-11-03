@@ -16,10 +16,13 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
+                Company @Html.DisplayNameFor(model => model.Company.Name)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Company.Name)
+                @Html.DisplayNameFor(model => model.PositionLevel.Level)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NextActionDue)
@@ -34,11 +37,17 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>*@
+                <td>
+                    <a href="@item.Company.CompanyUrl" alt="company name">@item.Company.CompanyUrl</a>
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Company.Name)
+                    @Html.DisplayFor(modelItem => item.PositionLevel.Level)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NextActionDue)
