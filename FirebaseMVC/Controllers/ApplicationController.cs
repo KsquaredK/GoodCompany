@@ -77,7 +77,7 @@ namespace GoodCompanyMVC.Controllers
                 Application = new Application(),
                 CompanyOptions = companies,
                 PositionLevelOptions = positionLevels,
-                Skills = skills
+                Skills = skills,
                 //multiselect^^ ChosenSkills property holds array of ints of skillIds
             };
 
@@ -94,6 +94,7 @@ namespace GoodCompanyMVC.Controllers
             {
                 vm.Application.UserProfileId = GetCurrentUserId();
                 _applicationRepo.AddApplication(vm.Application);
+
 
                 return RedirectToAction("UserIndex");
 

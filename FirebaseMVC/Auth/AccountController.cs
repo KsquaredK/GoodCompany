@@ -90,7 +90,7 @@ namespace GoodCompanyMVC.Auth
 
             await LoginToApp(newUserProfile);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("UserIndex", "Application");
         }
 
         public async Task<IActionResult> Logout()

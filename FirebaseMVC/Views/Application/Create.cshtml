@@ -20,11 +20,15 @@
             <div class="form-group">
                 <label asp-for="Application.CompanyId" class="control-label">Company Name</label>
                 <select asp-for="Application.CompanyId" class="form-control">
+                    <option value="">Select Company</option>
                     @foreach (var company in Model.CompanyOptions)
                     {
                         <option value="@company.Id">@company.Name</option>
                     }
-                </select>
+                </select>   
+                <div>
+                    Don't see your company? Add it <a asp-controller="Company" asp-action="Create">here</a>.
+                </div>
                 <span asp-validation-for="Application.CompanyId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -68,7 +72,7 @@
                 <span asp-validation-for="Application.SalaryRangeHigh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Application.FullBenefits" class="control-label">Full Benefits?</label>
+                <label asp-for="Application.FullBenefits" class="control-label">Full Benefits? (true/false)</label>
                 <input asp-for="Application.FullBenefits" class="form-control" />
                 <span asp-validation-for="Application.FullBenefits" class="text-danger"></span>
             </div>

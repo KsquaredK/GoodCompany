@@ -29,6 +29,7 @@ namespace GoodCompanyMVC.Models
         [Required]
         [DisplayName("Date Listed")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DateListed { get; set; }
 
         [DisplayName("Date Applied")]
@@ -41,6 +42,7 @@ namespace GoodCompanyMVC.Models
         [Required]
         [DisplayName("Next Action Due")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime NextActionDue { get; set; }
 
         public int? SalaryRangeLow { get; set; }
