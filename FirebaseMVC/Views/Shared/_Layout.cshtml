@@ -14,12 +14,12 @@
         <nav id="gc-nav" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GoodCompany</a>
-                    <ul id="gc-nav-ul" class="navbar-nav flex-grow-2">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Application" asp-action="UserIndex">Applications</a>
+                    <ul class="navbar-nav flex-grow-2">
+                        <li class="nav-item" style="list-style-type: none" >
+                            <a class="nav-link text-dark pt-3 pb-0" asp-area="" asp-controller="Application" asp-action="UserIndex">Applications  &nbsp;&nbsp; &nbsp;&nbsp;  </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action="Index">Companies</a>
+                        <li class="nav-item" style="list-style-type: none">
+                            <a class="nav-link text-dark pt-3 pb-0" asp-area="" asp-controller="Company" asp-action="Index">Companies  &nbsp;&nbsp; &nbsp;&nbsp;  </a>
                         </li>
                     </ul>
                 @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -30,16 +30,16 @@
                     <ul id="gc-nav-ul" class="navbar-nav  list-style-none">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item navbar-right">
+                            <li class="nav-item navbar-right" style="list-style-type: none">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <li class="nav-item" style="list-style-type: none">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login &nbsp;&nbsp; &nbsp;&nbsp;  </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="list-style-type: none">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }

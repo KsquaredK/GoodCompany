@@ -37,11 +37,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.Company.Name)
-                </td>*@
                 <td>
-                    <a href="@item.Company.CompanyUrl" alt="company name">@item.Company.CompanyUrl</a>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)

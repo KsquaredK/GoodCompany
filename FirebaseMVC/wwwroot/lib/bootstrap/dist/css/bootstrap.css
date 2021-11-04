@@ -1410,6 +1410,7 @@ ol {
     margin-top: 0;
     margin-bottom: 9px;
     list-style: none;
+    list-style-type: none;
 }
 ul ul,
 ol ul,
@@ -1430,7 +1431,7 @@ ol ol {
   display: inline-block;
   padding-right: 5px;
   padding-left: 5px;
-  list-style-type: none;
+  list-style: none;
   list-style-type: none;
 }
 dl {
@@ -3928,11 +3929,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li {
   position: relative;
   display: block;
+  list-style: none;
 }
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 30px 15px;
+  padding: 20px 25px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -4131,6 +4133,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-collapse {
   padding-right: 15px;
   padding-left: 15px;
+  padding-top: 11px;
   overflow-x: visible;
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -4241,7 +4244,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle {
   position: relative;
   float: right;
-  padding: 9px 10px;
+  padding: 14px 10px;
   margin-right: 15px;
   margin-top: 3px;
   margin-bottom: 3px;
@@ -4271,7 +4274,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin: 5.5px -15px;
 }
 .navbar-nav > li > a {
-  padding-top: 10px;
+  padding-top: 20px;
   padding-bottom: 10px;
   line-height: 18px;
 }
@@ -4307,7 +4310,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-nav > li > a {
     padding-top: 11px;
-    padding-bottom: 11px;
+    /*padding-bottom: 11px;*/
   }
 }
 .navbar-form {
