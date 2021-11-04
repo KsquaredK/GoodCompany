@@ -1,5 +1,10 @@
 # GoodCompany MVC
 ## A desktop app that makes your job search easier by helping you track your applications, research, and deadlines.
+
+<p align="center">
+<img src="https://photos.app.goo.gl/B1ZjmXRq1NXooowC7" width="450" height="225" border="0"/>
+</p>
+
 * backend capstone project for Nashville Software School's Full-Stack Web Development Bootcamp
 * using C# and .NET framework
 
