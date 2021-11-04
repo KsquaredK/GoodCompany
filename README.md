@@ -2,7 +2,7 @@
 ## A desktop app that makes your job search easier by helping you track your applications, research, and deadlines.
 
 <p align="center">
-<img src="https://photos.app.goo.gl/B1ZjmXRq1NXooowC7" width="450" height="225" border="0"/>
+<img src="https://lh3.googleusercontent.com/pw/AM-JKLUMPW-daUPvK8UuKy0czDdrdVQnJw6MpVOvd1wIxpbssWaWd0ayjMJhXXNoAm92pIxjiXTkB2NTaPIz2qQoXpFVbB3VFGiC_MDuYDysdte8wcSJCzPh5KhNzF2wyV9VMso4PWcrkZQjjMNzVbIbw8pz-w=w600-h400-no" width="450" height="225" border="0"/>
 </p>
 
 * backend capstone project for Nashville Software School's Full-Stack Web Development Bootcamp
