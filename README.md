@@ -1,5 +1,5 @@
 # GoodCompany MVC
-* a back end capstone project for Nashville Software School's Full-Time Web Decelopment Bootcamp
+* a back end capstone project for Nashville Software School's Full-Stack Web Development Bootcamp
 * using C# and .NET framework
 
 ### Try out GoodCompany:
