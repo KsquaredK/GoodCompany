@@ -10,11 +10,11 @@
 * Use the F5 key to launch the program in the browser on port 5001. (It will appear as localhost:5001 in your browser's address bar).
 
 ### Tech Stack:
-C# |  
-ASP.NET Core  |  
-SQL Server  |  
-Bootstrap/Bootswatch/CSS3  |  
-Firebase authentication  
+* C#   
+* ASP.NET Core    
+* SQL Server    
+* Bootstrap/Bootswatch/CSS3    
+* Firebase authentication  
 
 ## A desktop app that makes your job search easier by helping you track your applications, research, and deadlines.
 ### ERD
