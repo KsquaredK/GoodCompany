@@ -15,14 +15,17 @@ namespace GoodCompanyMVC.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Company size is required.")]
+        [DisplayName("Company Size")]
         public string CompanySize { get; set; }
 
         [Required(ErrorMessage = "Company site is required.")]
         [DisplayName("Company Site")]
         public string CompanyUrl { get; set; }
 
+        [DisplayName("Has Mentoring")]
         public bool HasMentor { get; set; }
 
+        [DisplayName("Has Professional Development")]
         public bool HasProfDev { get; set; }
 
         public UserProfile userProfile { get; set; }

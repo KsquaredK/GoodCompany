@@ -48,9 +48,44 @@ namespace GoodCompanyMVC.Repositories
         }
 
 
-        public void GetPositionByApplication(int applicationId)
+        public PositionLevel GetPositionLevelByApplication(int applicationId)
         {
-            throw new NotImplementedException();
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                      SELECT  p.Id AS Id, p.Level,
+                              a.Id AS applicationId
+                      FROM PositionLevel p
+                      LEFT JOIN Application a ON a.PositionLevelId = p.Id
+                      WHERE a.Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", applicationId);
+
+
+                    PositionLevel positionLevel = null;
+                    using var reader = cmd.ExecuteReader();
+                    {
+                        while (reader.Read())
+                        {
+                            if (positionLevel == null)
+                            {
+                                //convert results of sql query to c# obj
+                                positionLevel = new PositionLevel
+                                {
+                                    Id = DbUtils.GetInt(reader, "Id"),
+                                    Level = DbUtils.GetString(reader, "Level")
+                                };
+                            }
+
+                        }
+                        return positionLevel;
+                    }
+                }
+
+            }
         }
 
         public void GetPositionLevelById(int id)

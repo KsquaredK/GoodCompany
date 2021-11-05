@@ -7,7 +7,7 @@ namespace GoodCompanyMVC.Repositories
     {
         void AddPositionLevel(PositionLevel positionLevel);
         void DeletePositionLevel(int id);
-        void GetPositionByApplication(int applicationId);
+        PositionLevel GetPositionLevelByApplication(int applicationId);
         void GetPositionLevelById(int id);
         List<PositionLevel> GetPositionLevels();
         void GetPositionLevelsByCurrentUser(int userProfileId);

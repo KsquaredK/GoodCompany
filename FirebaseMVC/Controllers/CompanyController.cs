@@ -80,7 +80,7 @@ namespace GoodCompanyMVC.Controllers
                 {
                     _companyRepo.AddCompany(company);
 //Redirect to updated list view
-                    return RedirectToAction("UserIndex");
+                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
@@ -127,7 +127,7 @@ namespace GoodCompanyMVC.Controllers
             try
             {
                 _companyRepo.DeleteCompany(id);
-                return RedirectToAction("UserIndex");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

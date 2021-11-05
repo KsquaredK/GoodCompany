@@ -57,6 +57,8 @@ namespace GoodCompanyMVC.Controllers
                 return NotFound();
             }
             application.Skills = _skillRepo.GetSkillsByApplication(application.Id);
+            PositionLevel positionLevel = _positionLevelRepo.GetPositionLevelByApplication(application.Id);
+            application.PositionLevel = positionLevel;
             var vm = new ApplicationViewModel()
             {
                 Application = application,
